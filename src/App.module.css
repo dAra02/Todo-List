@@ -1,0 +1,23 @@
+body {
+	background: #282c34;
+}
+
+h1 {
+	margin-left: 10px;
+}
+
+.App {
+	text-align: left;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.todos {
+	margin: 10px;
+	text-decoration: underline;
+	text-underline-offset: 5px;
+}
