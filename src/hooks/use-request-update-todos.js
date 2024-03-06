@@ -1,23 +1,20 @@
 import { useState } from 'react';
+import { ref, set } from 'firebase/database';
+import { db } from '../firebase';
 
-export const useUpdateTodos = (refrechTod) => {
+export const useUpdateTodos = () => {
 	const [isUpdating, setIsUpdating] = useState(false);
 
 	const requestUpdateTodos = () => {
 		setIsUpdating(true);
 
-		fetch(`http://localhost:3005/Todos/${Number(prompt('Ввести id заметки'))}`, {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				// title: 'Lorem ipsum dolor sit.',
-				title: prompt('Изменить заметку'),
-			}),
+		const todoDbRef = ref(db, `Todos/${prompt('Ввести id заметки')}`);
+
+		set(todoDbRef, {
+			title: prompt('Изменить заметку'),
 		})
-			.then((otvet) => otvet.json)
 			.then((response) => {
 				console.log('Списки обновлены, ответ сервера', response);
-				refrechTod();
 			})
 			.finally(() => setIsUpdating(false));
 	};

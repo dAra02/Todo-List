@@ -8,7 +8,7 @@ export const TaskBlock = ({ poisc, isLoading, newTodo }) => {
 			{isLoading ? (
 				<div className={style.loader}></div>
 			) : (
-				newTodo.map(({ id, title }) => (
+				Object.entries(newTodo).map(([id, { title }]) => (
 					<div className={style.todos} key={id}>
 						{title}
 					</div>

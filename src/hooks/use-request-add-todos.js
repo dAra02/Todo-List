@@ -1,23 +1,20 @@
 import { useState } from 'react';
+import { ref, set } from 'firebase/database';
+import { db } from '../firebase';
 
-export const useAddTodo = (refrechTod) => {
+export const useAddTodo = () => {
 	const [isCreating, setIsCreating] = useState(false);
 
 	const requestAddTodos = () => {
 		setIsCreating(true);
 
-		fetch('http://localhost:3005/Todos', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json;charset=utf-8' },
-			body: JSON.stringify({
-				// title: 'Lorem ipsum dolor sit.',
-				title: prompt('Введите новые дела'),
-			}),
+		const todoDbRef = ref(db, `Todos/${prompt('id задачи')}`);
+
+		set(todoDbRef, {
+			title: prompt('Введите новые дела'),
 		})
-			.then((otvet) => otvet.json)
 			.then((response) => {
 				console.log('Новый список добавлен, ответ сервера', response);
-				refrechTod();
 			})
 			.finally(() => setIsCreating(false));
 	};

@@ -4,16 +4,12 @@ import { BlockBtn, SotrBtn, TaskBlock } from './component';
 import './App.css';
 
 export const App = () => {
-	const [refrechTodos, setRefrechTodos] = useState(false);
-
-	const refrechTod = () => setRefrechTodos(!refrechTodos);
-
-	const { todo, isLoading } = useGetTodos(refrechTodos);
+	const { todo, isLoading } = useGetTodos();
 	const [newTodo, setNewTodo] = useState([]);
 
-	const { isCreating, requestAddTodos } = useAddTodo(refrechTod);
-	const { isUpdating, requestUpdateTodos } = useUpdateTodos(refrechTod);
-	const { isDelete, requestDeleteTodos } = useDeleteTodos(refrechTod);
+	const { isCreating, requestAddTodos } = useAddTodo();
+	const { isUpdating, requestUpdateTodos } = useUpdateTodos();
+	const { isDelete, requestDeleteTodos } = useDeleteTodos();
 
 	useEffect(() => {
 		setNewTodo(todo);
@@ -25,8 +21,8 @@ export const App = () => {
 		if (value !== '') {
 			currentTodos = todo;
 
-			newList = currentTodos.filter((todo) => {
-				const element = todo.title.toLowerCase();
+			newList = currentTodos.filter(({ title }) => {
+				const element = title.toLowerCase();
 				const filter = value.toLowerCase();
 
 				return element.includes(filter);
