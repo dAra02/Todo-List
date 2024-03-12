@@ -34,26 +34,17 @@ export const App = () => {
 	};
 
 	const sort = () => {
-		let list, i, perestanovka, taskBlock, sleduetPerekl;
-		list = document.getElementById('1');
-		perestanovka = true;
-
-		while (perestanovka) {
-			perestanovka = false;
-			taskBlock = list.getElementsByTagName('div');
-
-			for (i = 0; i < taskBlock.length - 1; i++) {
-				sleduetPerekl = false;
-				if (taskBlock[i].innerHTML.toLowerCase() > taskBlock[i + 1].innerHTML.toLowerCase()) {
-					sleduetPerekl = true;
-					break;
-				}
+		const sortedTodos = newTodo.sort((a, b) => {
+			if (a.title.toLowerCase() < b.title.toLowerCase()) {
+				return -1;
 			}
-			if (sleduetPerekl) {
-				taskBlock[i].parentNode.insertBefore(taskBlock[i + 1], taskBlock[i]);
-				perestanovka = true;
+			if (a.title.toLowerCase() > b.title.toLowerCase()) {
+				return 1;
 			}
-		}
+			return 0;
+		});
+		setNewTodo(sortedTodos);
+		console.log(sortedTodos);
 	};
 
 	return (

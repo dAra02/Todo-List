@@ -2,7 +2,7 @@ import style from './taskBlock.module.css';
 
 export const TaskBlock = ({ poisc, isLoading, newTodo }) => {
 	return (
-		<div className={style.block} id={1}>
+		<div className={style.block}>
 			<h3 className={style.zagalovok}>Todo list</h3>
 			<input onChange={({ target: { value } }) => poisc(value)} type="text" className={style.poisc} placeholder="Поиск..." />
 			{isLoading ? (
